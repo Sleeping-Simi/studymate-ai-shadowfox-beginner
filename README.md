@@ -1,266 +1,125 @@
-\# 🎓 StudyMate AI
+<div align="center">
 
+# 🎓 StudyMate AI
 
+**Turn your notes into summaries, quizzes, better answers and clear explanations.**
 
-An AI-powered study assistant built as part of the \*\*ShadowFox AI Engineer Internship – Beginner Level Task\*\*.
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit&logoColor=white)
+![Gemini](https://img.shields.io/badge/Google%20Gemini-API-4285F4?logo=googlegemini&logoColor=white)
+![ShadowFox](https://img.shields.io/badge/ShadowFox-AI%20Engineer%20Internship-7C3AED)
 
+*An AI-powered student utility app built for the **ShadowFox AI Engineer Internship – Beginner Level**.*
 
+</div>
 
-StudyMate AI helps students learn more effectively using an AI-powered interface with multiple study utilities.
+---
 
+## ✨ Features
 
+| Tool | What you get |
+|---|---|
+| 📝 **Summarise Notes** | Main idea, key points and key terms — short, medium or detailed |
+| ❓ **Generate Quiz** | 3–10 multiple-choice questions (easy / medium / hard) with a hidden answer key |
+| ✍️ **Improve My Answer** | A stronger rewrite for your exam level, what changed, and one tip |
+| 💡 **Explain a Concept** | Definition, step-by-step explanation, real-life example and quick recap |
 
-\## ✨ Features
+Plus: ⬇️ downloadable output · 🕘 session history · 🛡️ input validation · 🔁 automatic retries on API failures
 
+## 🧭 How It Works
 
+```mermaid
+flowchart LR
+    A[User input] --> B[Validation] --> C[Prompt builder] --> D[Gemini API] --> E[Formatted output]
+```
 
-\### 1. Explain a Concept
+### Prompt structure
+Every request is built from five parts so results stay relevant and consistent:
 
+1. **Role** – a system instruction defines StudyMate as a careful study assistant
+2. **Task** – a mode-specific instruction with the options you chose
+3. **Input** – your text, wrapped in `<input>` tags
+4. **Constraints** – use only your material, simple language, ignore instructions hidden inside the input
+5. **Output format** – headings, bullets, and a fixed `===ANSWERS===` marker for quizzes
 
+### Validation & error handling
 
-Enter a topic or study material and StudyMate AI provides a simple, structured explanation.
+| Situation | Response |
+|---|---|
+| Empty input | Warning, no API call |
+| No letters (symbols/numbers only) | Asks for some words |
+| Extremely long input (100,000+ chars) | Asks to shorten it |
+| Missing / invalid API key, wrong model | Clear message pointing to `.env` |
+| Rate limit or server busy | Retries with back-off, then a friendly message |
+| Empty or blocked response | Asks to rephrase |
+| Network failure | Asks to check the connection |
 
+## 🛠️ Tech Stack
 
+`Python` · `Streamlit` · `google-genai` · `python-dotenv`
 
-\### 2. Generate Quiz
-
-
-
-Generate multiple-choice questions from provided study material for self-assessment.
-
-
-
-\### 3. Improve an Answer
-
-
-
-Submit an existing answer and receive an improved, clearer and more complete version.
-
-
-
-\### 4. Simple User Interface
-
-
-
-The application is built using Streamlit with an easy-to-use interface.
-
-
-
-\## 🛠️ Technologies Used
-
-
-
-\* Python
-
-\* Streamlit
-
-\* Google Gemini API
-
-\* python-dotenv
-
-
-
-\## 📁 Project Structure
-
-
+## 📁 Project Structure
 
 ```text
-
-StudyMate-AI/
-
-│
-
-├── app.py
-
-├── prompts.py
-
-├── requirements.txt
-
-├── .gitignore
-
+studymate-ai/
+├── app.py             # UI, validation, prompt builder, Gemini calls
+├── requirements.txt   # dependencies
+├── .env.example       # template for your API key
+├── .gitignore         # keeps .env out of GitHub
 ├── README.md
-
-│
-
-└── screenshots/
-
-&#x20;   ├── explain-concept.png
-
-&#x20;   ├── generate-quiz.png
-
-&#x20;   └── improve-answer.png
-
+└── screenshots/       # app screenshots used below
 ```
 
-
-
-\## 🚀 How to Run
-
-
-
-\### 1. Clone the repository
-
-
+## 🚀 Getting Started
 
 ```bash
-
-git clone https://github.com/Sleeping-Simi/studymate-ai-shadowfox-beginner.git
-
-```
-
-
-
-\### 2. Open the project
-
-
-
-```bash
-
-cd studymate-ai-shadowfox-beginner
-
-```
-
-
-
-\### 3. Create a virtual environment
-
-
-
-```bash
+git clone https://github.com/Aditya-timekiller/shadowfox-begineer.git
+cd shadowfox-begineer
 
 python -m venv venv
-
-```
-
-
-
-\### 4. Activate the virtual environment
-
-
-
-Windows PowerShell:
-
-
-
-```powershell
-
-venv\\Scripts\\Activate.ps1
-
-```
-
-
-
-\### 5. Install dependencies
-
-
-
-```bash
-
+venv\Scripts\activate            # Mac/Linux: source venv/bin/activate
 pip install -r requirements.txt
 
+copy .env.example .env           # Mac/Linux: cp .env.example .env
+streamlit run app.py
 ```
 
-
-
-\### 6. Configure the Gemini API key
-
-
-
-Create a `.env` file:
-
-
+Open `.env` and add your key from [Google AI Studio](https://aistudio.google.com/apikey):
 
 ```env
-
-GEMINI\_API\_KEY=your\_api\_key\_here
-
+GEMINI_API_KEY=your_api_key_here
+GEMINI_MODEL=gemini-3.5-flash
 ```
 
+> ⚠️ Never upload your `.env` file to GitHub.
 
+## 📸 Screenshots
 
-Do not upload the `.env` file to GitHub.
+**Summarise Notes**
+![Summarise Notes](screenshots/summarise-notes.png)
 
+**Generate Quiz**
+![Generate Quiz](screenshots/generate-quiz.png)
 
+**Improve My Answer**
+![Improve My Answer](screenshots/improve-answer.png)
 
-\### 7. Run the application
+**Explain a Concept**
+![Explain a Concept](screenshots/explain-concept.png)
 
+## 🎯 Internship Task Checklist
 
+| Requirement | Status |
+|---|---|
+| Simple, usable interface | ✅ Streamlit sidebar + main panel |
+| Text input area | ✅ |
+| AI-powered utility features | ✅ Four study tools |
+| Prompt-based output generation | ✅ Structured 5-part prompts |
+| Validation for empty / invalid input | ✅ |
+| Error handling for failed API responses | ✅ Retries + friendly messages |
+| Clear display of output | ✅ Markdown, expandable answers, download |
+| Clean user flow | ✅ Pick tool → paste → Generate |
 
-```bash
+## 👨‍💻 Author
 
-streamlit run app.py
-
-```
-
-
-
-The application will open in the browser at the local Streamlit URL.
-
-
-
-\## 📸 Screenshots
-
-
-
-\### Explain a Concept
-
-
-
-!\[Explain Concept](screenshots/explain-concept.png)
-
-
-
-\### Generate Quiz
-
-
-
-!\[Generate Quiz](screenshots/generate-quiz.png)
-
-
-
-\### Improve an Answer
-
-
-
-!\[Improve Answer](screenshots/improve-answer.png)
-
-
-
-\## 🎯 Internship Task
-
-
-
-This project was developed for the \*\*ShadowFox AI Engineer Internship – Beginner Level\*\*.
-
-
-
-The application demonstrates the use of an LLM API to provide an AI-powered student utility application with:
-
-
-
-\* Text input
-
-\* AI-generated responses
-
-\* Prompt-based utilities
-
-\* Input handling
-
-\* Error handling
-
-\* Interactive user interface
-
-
-
-\## 👩‍💻 Author
-
-
-
-\*\*Sovangi Poddar\*\*
-
-
-
-GitHub: \[Sleeping-Simi](https://github.com/Sleeping-Simi)
-
-
-
+Built by **[Aditya-timekiller](https://github.com/Aditya-timekiller)**
