@@ -66,8 +66,7 @@ studymate-ai/
 ├── requirements.txt   # dependencies
 ├── .env.example       # template for your API key
 ├── .gitignore         # keeps .env out of GitHub
-├── README.md
-└── screenshots/       # app screenshots used below
+└── README.md
 ```
 
 ## 🚀 Getting Started
@@ -93,20 +92,6 @@ GEMINI_MODEL=gemini-3.5-flash
 
 > ⚠️ Never upload your `.env` file to GitHub.
 
-## 📸 Screenshots
-
-**Summarise Notes**
-![Summarise Notes](screenshots/summarise-notes.png)
-
-**Generate Quiz**
-![Generate Quiz](screenshots/generate-quiz.png)
-
-**Improve My Answer**
-![Improve My Answer](screenshots/improve-answer.png)
-
-**Explain a Concept**
-![Explain a Concept](screenshots/explain-concept.png)
-
 ## 🎯 Internship Task Checklist
 
 | Requirement | Status |
@@ -122,4 +107,4 @@ GEMINI_MODEL=gemini-3.5-flash
 
 ## 👨‍💻 Author
 
-Built by **[Aditya-timekiller](https://github.com/Aditya-timekiller)**
+Built by **[Sleeping-Simi](https://github.com/Sleeping-Simi)**
